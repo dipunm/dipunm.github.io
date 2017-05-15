@@ -1,4 +1,38 @@
-theme: jekyll-theme-slate
-title: Return Null
-description: Greedy motherlover taking params, but never giving back.
-show_downloads: false
+# Site settings
+title: Dipun Mistry
+description: Into the mind of a developing developer who develops software for a development company in the center of a city known for hiring developers.
+url: 'http://www.dipunmistry.co.uk'
+baseurl: '/'
+# google_analytics: 'UA-XXXXXX-X'
+# disqus_shortname: 'your-disqus-name'
+
+author:
+  name: 'Dipun Mistry'
+  email: contact@dipunmistry.co.uk
+  twitter_username: dipunm
+  github_username:  dipunm
+  linkedin_username:  dipunm
+
+defaults:
+  -
+    scope:
+      path: ''
+      type: 'posts'
+    values:
+        layout: 'post'
+
+# Build settings
+destination: _site
+paginate: 10
+permalink: /:year/:title/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
+
+gems: ['jekyll-paginate']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
