@@ -1,6 +1,6 @@
 # Site settings
 title: Dipun Mistry
-description: '`[ $[ $RANDOM % 6 ] == 0 ] && rm -rf / || echo *Click*`'
+description: Into the mind of a developing developer who develops software for a development company in the center of a city known for hiring developers.
 url: 'http://www.dipunmistry.co.uk'
 baseurl: '/'
 # google_analytics: 'UA-XXXXXX-X'
