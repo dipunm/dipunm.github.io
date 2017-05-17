@@ -4,13 +4,18 @@ layout: null
 $(document).ready(function () {
   $('a.blog-button').click(function (e) {
     if ($('.panel-cover').hasClass('panel-cover--collapsed')) return
-    currentWidth = $('.panel-cover').width()
-    if (currentWidth < 960) {
+    
+    var currentWidth = $('.panel-cover').width()
+    var isMobile = $('.btn-mobile-menu').is(':visible');
+    if (isMobile) {
       $('.panel-cover').addClass('panel-cover--collapsed')
       $('.content-wrapper').addClass('animated slideInRight')
     } else {
       $('.panel-cover').css('max-width', currentWidth)
-      $('.panel-cover').animate({'max-width': '530px', 'width': '40%'}, 400, swing = 'swing', function () {})
+      $('.panel-cover').animate({'max-width': '530px', 'width': '40%'}, 400, swing = 'swing', function () {
+        $('.panel-cover').addClass('panel-cover--collapsed')
+        $('.panel-cover').removeAttr('style')
+      })
     }
   })
 
@@ -28,7 +33,10 @@ $(document).ready(function () {
   })
 
   $('.navigation-wrapper .blog-button').click(function () {
-    $('.navigation-wrapper').toggleClass('visible')
+    var isMobile = $('.btn-mobile-menu').is(':visible');
+    if (!isMobile) { return; }    
+    
+    $('.navigation-wrapper').toggleClass('visible animated bounceInDown')
     $('.btn-mobile-menu__icon').toggleClass('icon-list icon-x-circle animated fadeIn')
   })
 
