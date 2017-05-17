@@ -1,7 +1,7 @@
 ---
 title: Tackling duplicate content with ASP.NET MVC
 date: 2016-03-31 00:40:25
-categories: [MVC, .NET, Nuget]
+categories: [MVC, .NET, C#, Nuget]
 tags: [SEO, Nuget, DuplicateContent, C#]
 ---
 **TLDR;** I have researched the duplicate content issue and created a NuGet package that has some flexibility and could solve the problem in a much more elegant way than most other solutions. Link to Github: <https://github.com/dipunm/SEO.DuplicateContent>

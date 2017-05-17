@@ -1,8 +1,8 @@
 ---
 title: My take on the Fixture Object pattern by Mark Seemann
-date: 2015-03-27 11:09:51.000000000 +00:00
-categories: []
-tags: []
+date: 2015-03-27 11:09:51
+categories: [C#, Testing, BestPractices]
+tags: [UnitTesting, Mocking, Fixture, Pattern, MarkSeemann]
 ---
 A fair while back, whilst discussing and experimenting with unit testing, I had read about this particular pattern. The Fixture Object pattern allows you to delegate complex `arrange` logic within your tests in order to improve readability and maintainability of your code.
 
@@ -13,7 +13,6 @@ In the post above, Mark shows how a fixture can be used to improve your tests re
 To help understand the pattern myself, I like to think of it as a _sort of stateful_ SUT factory. The key word here is stateful; the dependencies of your SUT will most likely have to be mocks or stubs that you will bend to your will in order to influence the outcome. The fixture can create and alter these dependencies on your behalf (but on command) in order to keep the arrange section of your tests lean and readable. Another thing to note, is that the fixture could help you set up complex method parameters also; this is why I made an emphasis on _sort of_.
 
 Before we continue, a quick disclaimer on the tools I will be using below; I use NUnit as my testing framework and Moq for mocking. Let's look at an example. Imagine a test as follows:
-
 ```csharp
 [TestFixture]
 public class CounterTests
@@ -46,6 +45,7 @@ public class CounterTests
     }
 }
 ```
+
 So, to summarise:
 1. We create a mock coupon code.
 2. Then we set up our coupon repository to create a valid coupon when asked about our mock coupon code.
@@ -80,7 +80,8 @@ public class CounterTests
     }
 }
 ```
-There is certainly less code, but did it achieve what it set out to?
+
+There are certainly less lines of code, but did it achieve what it set out to?
 1. The first thing we do is to create a basket. The basket should have a product sum of £130.00 and should include a coupon code applied with a value of 'OXAD'.
 2. We then add a valid coupon to our repository with the same coupon code as used before, and with a discount of 0.2 (20%).
 3. Finally, we get our SUT before running our test and asserting that our discount was applied.
@@ -173,6 +174,7 @@ internal class TestFixture
     }
 }
 ```
+
 Above is the TestFixture. As you can see, the public method names are written to be easy to read and the class will keep a reference to each of the dependencies that it needs so that any modification made on it will not be lost. There are a few refactoring steps missing here, I went through a bunch of variations of the fixture pattern before settling, and even now, I am adjusting it as I need to.
 
 One thing you may notice is the lazy loading happening almost everywhere. The idea here, is that we have a default construction method that creates the objects that the SUT needs in a barebones way.
@@ -244,4 +246,5 @@ internal class TestFixture
     }
 }
 ```
+
 This fixture doesn't try to over think any what-if scenarios, the only part of this that makes me worry a little, is that the SUT is created right at the beginning and using the CouponRepository before any setups have been defined on the mock. Moq does not require that mocks were set up before exporting the object, but it does require that the object is not used before a setup has been made. Even so, I think that exporting the object before setting up the mock can cause confusion and so in my final implementation, I would leave only the SUT lazy loaded.
